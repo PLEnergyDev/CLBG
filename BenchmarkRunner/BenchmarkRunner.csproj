@@ -7,4 +7,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="CsharpRAPL" Version="1.4.1" />
+      <PackageReference Include="SocketComm" Version="1.1.2" />
+    </ItemGroup>
+
 </Project>

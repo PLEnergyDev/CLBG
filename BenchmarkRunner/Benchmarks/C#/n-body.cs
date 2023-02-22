@@ -15,7 +15,7 @@ public class n_body
     {
         ulong n = LoopIterations;
         NBodySystem bodies = new NBodySystem();
-        Console.WriteLine("{0:f9}", bodies.Energy());
+        //Console.WriteLine("{0:f9}", bodies.Energy());
         for (ulong i = 0; i < n; i++) bodies.Advance(0.01);
         return bodies.Energy();
     }

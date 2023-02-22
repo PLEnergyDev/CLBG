@@ -7,10 +7,9 @@ using System.Text;
 using System.Buffers;
 using System.Threading;
 using System.Runtime.CompilerServices;
-
-public class Fasta
+public class Fasta_optimized
 {
-    const int Width = 60;
+     const int Width = 60;
     const int Width1 = 61;
     const int LinesPerBlock = 2048;
     const int BlockSize = Width * LinesPerBlock;
@@ -23,7 +22,7 @@ public class Fasta
     static readonly ArrayPool<byte> bytePool = ArrayPool<byte>.Shared;
     static readonly ArrayPool<int> intPool = ArrayPool<int>.Shared;
 
-    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static byte[] Bytes(int i, int[] rnds, float[] ps, byte[] vs)
     {
         var a = bytePool.Rent(BlockSize1);
@@ -38,7 +37,7 @@ public class Fasta
         return a;
     }
 
-    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static int[] Rnds(int i, int j, ref int seed)
     {
         var a = intPool.Rent(BlockSize1);
@@ -59,7 +58,7 @@ public class Fasta
         return a;
     }
 
-    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     static int WriteRandom(int n, int offset, int seed, byte[] vs, float[] ps,
         Tuple<byte[], int>[] blocks)
     {
@@ -96,7 +95,7 @@ public class Fasta
         return seed;
     }
     
-    [Benchmark("Fasta","Fasta in C#", name:"C sharp FAS", skip: false)]
+    [Benchmark("Fasta","Fasta in C# with optimizations", name:"C sharp FAS opt", skip: false)]
     public static long Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
         int n = 1000;

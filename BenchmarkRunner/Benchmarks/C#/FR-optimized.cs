@@ -1,12 +1,11 @@
+namespace BenchmarkRunner.Benchmarks.C_;
 using CsharpRAPL.Benchmarking.Attributes;
 using CsharpRAPL.Benchmarking.Attributes.Parameters;
-
-namespace BenchmarkRunner.Benchmarks.C_;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-public class fannkuch_redux
+public class FR_optimized
 {
     private const int MAX_N = 16;
     private static readonly int[] _factorials = new int[MAX_N + 1];
@@ -16,8 +15,8 @@ public class fannkuch_redux
     private static int _blockCount;
     private static int _blockSize;
 
-    //[MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    [Benchmark("Fannkuch redux", "Fannuck redux in C#", name: "C sharp FR", skip: false)]
+    [MethodImpl(MethodImplOptions.AggressiveOptimization)]
+    [Benchmark("Fannkuch redux", "Fannuck redux in C# with optimization", name: "C sharp FR opt", skip: false)]
     private static int Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
         _n = 12;
@@ -55,7 +54,7 @@ public class fannkuch_redux
         return result;
     }
 
-    //[MethodImpl(MethodImplOptions.AggressiveOptimization)]
+    [MethodImpl(MethodImplOptions.AggressiveOptimization)]
     private static void pfannkuchThread()
     {
         var masks_shift = new Vector128<byte>[16];

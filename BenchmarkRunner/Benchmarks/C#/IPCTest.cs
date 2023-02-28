@@ -32,7 +32,7 @@ public class IPCTest
     
     [Benchmark("NBody", "NBody in C# over IPC",
         typeof(IpcBenchmarkLifecycle),
-        name: "C sharp Nbody IPC", skip: true)]
+        name: "C sharp Nbody IPC", skip: false)]
     public static IpcState IPCNBody(IpcState s)
     {
         s.ExecutablePath = "../CSIPC/bin/Release/net6.0/CSIPC";

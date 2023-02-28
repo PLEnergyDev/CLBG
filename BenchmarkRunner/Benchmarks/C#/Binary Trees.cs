@@ -12,7 +12,7 @@ class BinaryTrees
     const int MinDepth = 4;
     const int NoTasks = 4;
     
-    [Benchmark("Binary trees","Binary trees in C#", name:"C sharp BT", skip: false)]
+    [Benchmark("Binary trees","Binary trees in C#", name:"C sharp BT", skip: true)]
     public static int BinaryTree([BenchmarkLoopiterations] ulong LoopIterations)
     {
         int maxDepth = 7;

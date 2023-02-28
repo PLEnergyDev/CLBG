@@ -16,7 +16,7 @@ public class FR_optimized
     private static int _blockSize;
 
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    [Benchmark("Fannkuch redux", "Fannuck redux in C# with optimization", name: "C sharp FR opt", skip: false)]
+    [Benchmark("Fannkuch redux", "Fannuck redux in C# with optimization", name: "C sharp FR opt", skip: true)]
     private static int Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
         _n = 12;

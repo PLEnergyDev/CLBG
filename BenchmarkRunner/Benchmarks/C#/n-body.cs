@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 public class n_body
 {
-    [Benchmark("NBody", "NBody n C#", name:"C sharp NB", skip: false)]
+    [Benchmark("NBody", "NBody n C#", name:"C sharp NB", skip: true)]
     public double Start([BenchmarkLoopiterations] ulong LoopIterations)
     {
         ulong n = LoopIterations;

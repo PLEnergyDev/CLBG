@@ -110,7 +110,7 @@ public class IPCTest
     }
 
     [Benchmark("Fannkuch redux", "Fannkuch redux optimized in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FR opt IPC")]
-    public static IpcState IpcFROptimized(IpcState s)
+    public static IpcState IPCFROptimized(IpcState s)
     {
         return IPCFR(s);
     }

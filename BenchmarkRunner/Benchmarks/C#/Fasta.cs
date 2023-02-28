@@ -96,7 +96,7 @@ public class Fasta
         return seed;
     }
     
-    [Benchmark("Fasta","Fasta in C#", name:"C sharp FAS", skip: true)]
+    [Benchmark("Fasta","Fasta in C#", name:"C sharp FAS", skip: false)]
     public static long Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
         int n = 1000;

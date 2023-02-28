@@ -7,15 +7,15 @@ namespace BenchmarkRunner.Benchmarks.C_;
 using System;
 using System.Threading.Tasks;
 
-class BinaryTrees
+public class BinaryTrees
 {
     const int MinDepth = 4;
     const int NoTasks = 4;
     
-    [Benchmark("Binary trees","Binary trees in C#", name:"C sharp BT", skip: true)]
-    public static int BinaryTree([BenchmarkLoopiterations] ulong LoopIterations)
+    [Benchmark("Binary Trees","Binary trees in C#", name:"C sharp BT", skip: false)]
+    public static int BinaryTree([BenchmarkLoopiterations] ulong LoopIterations, int maxDepth = 7)
     {
-        int maxDepth = 7;
+        //int maxDepth = 7;
         int result = 0;
 
         //Console.WriteLine(string.Concat("stretch tree of depth ", maxDepth + 1,"\t check: ", (bottomUpTree(maxDepth + 1)).itemCheck()));

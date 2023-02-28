@@ -95,7 +95,7 @@ public class Fasta_optimized
         return seed;
     }
     
-    [Benchmark("Fasta","Fasta in C# with optimizations", name:"C sharp FAS opt", skip: true)]
+    [Benchmark("Fasta","Fasta in C# with optimizations", name:"C sharp FAS opt", skip: false)]
     public static long Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
         int n = 1000;

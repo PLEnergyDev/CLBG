@@ -1,6 +1,8 @@
 ﻿
+using System.Linq.Expressions;
 using System.Text;
 using SocketComm;
+using BenchmarkRunner.Benchmarks.C_;
 if (args.Length < 1)
 {
     Console.Error.WriteLine("usage: [socket]");
@@ -18,26 +20,52 @@ try
     while (flag)
     {
         pipe.WriteCmd(Cmd.Ready);
-        //Console.WriteLine("sent write, expecting receive");
+
         pipe.ExpectCmd(Cmd.Receive);
         ulong loopiterations = pipe.ReceiveValue(SimpleConversion.BytesToNumber<ulong>);
-        //o.Write(Encoding.ASCII.GetBytes($"Received loop iterations: {loopiterations}\n"));
-        pipe.WriteCmd(Cmd.Ready);
-        pipe.ExpectCmd(Cmd.Receive);
-        int i = pipe.ReceiveValue(SimpleConversion.BytesToNumber<int>);
-        //o.Write(Encoding.ASCII.GetBytes($"Received input: {i}\n"));
+
         pipe.WriteCmd(Cmd.Ready);
         pipe.ExpectCmd(Cmd.Go);
 //RUn code
-        for (ulong n = 0; n < loopiterations; n++)
+        switch (path)
         {
-            i++;
+            case "/tmp/IPCNBody.pipe":
+                var nbresult = n_body.Start(loopiterations);
+                pipe.WriteCmd(Cmd.Done);
+                pipe.ExpectCmd(Cmd.Ready);
+                pipe.SendValue(nbresult, SimpleConversion.NumberToBytes);
+                break;
+            case "/tmp/IPCBinaryTrees.pipe":
+                var btresult = BinaryTrees.BinaryTree(loopiterations);
+                pipe.WriteCmd(Cmd.Done);
+                pipe.ExpectCmd(Cmd.Ready);
+                pipe.SendValue(btresult, SimpleConversion.NumberToBytes);
+                break;
+            case "/tmp/IPCFR.pipe":
+                var frresult = fannkuch_redux.Main(loopiterations);
+                pipe.WriteCmd(Cmd.Done);
+                pipe.ExpectCmd(Cmd.Ready);
+                pipe.SendValue(frresult, SimpleConversion.NumberToBytes);
+                break;
+            case "/tmp/IPCFasta.pipe":
+                var fastaresult = Fasta.Main(loopiterations);
+                pipe.WriteCmd(Cmd.Done);
+                pipe.ExpectCmd(Cmd.Ready);
+                pipe.SendValue(fastaresult, SimpleConversion.NumberToBytes);
+                break;
+            case "/tmp/IPCFastaOptimized.pipe":
+                var fastaopt = Fasta_optimized.Main(loopiterations);
+                pipe.WriteCmd(Cmd.Done);
+                pipe.ExpectCmd(Cmd.Ready);
+                pipe.SendValue(fastaopt, SimpleConversion.NumberToBytes);
+                break;
+            case "/tmp/IPCFROptimized.pipe":
+                var frOpt = FR_optimized.Main(loopiterations);
+                pipe.WriteCmd(Cmd.Done);
+                pipe.ExpectCmd(Cmd.Ready);
+                pipe.SendValue(frOpt, SimpleConversion.NumberToBytes);
+                break;
         }
-
-        pipe.WriteCmd(Cmd.Done);
-        pipe.ExpectCmd(Cmd.Ready);
-        //o.Write(Encoding.ASCII.GetBytes($"Sending result: {i}\n"));
-        pipe.SendValue(i, SimpleConversion.NumberToBytes);
         Cmd c = pipe.ReadCmd();
         if (c != Cmd.Ready)
         {

@@ -1,13 +1,7 @@
-//
-// Created by adrian on 3/7/23.
-//
 
 #include "BinaryTrees.h"
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <apr_pools.h>
+
 
 // intptr_t should be the native integer type on most sane systems.
 typedef intptr_t intnative_t;

@@ -18,6 +18,7 @@ int main(int argc, char **argv){
         exit(EXIT_FAILURE);
     }
     writeCmd(s, Ready);
+    // TODO: Get loopiterations over ipc
     int LoopIterations = 1;
     int c;
     do{
@@ -29,6 +30,7 @@ int main(int argc, char **argv){
         {
             exit(EXIT_FAILURE);
         }
+        // TODO: return value
         writeCmd(s, Done); //
         c = readCmd(s);
     } while(c == Ready);

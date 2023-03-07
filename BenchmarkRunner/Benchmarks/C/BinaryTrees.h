@@ -5,6 +5,9 @@
 #ifndef C_BINARYTREES_H
 #define C_BINARYTREES_H
 
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <apr_pools.h>
 
 int BinaryTrees(ulong loopIterations);

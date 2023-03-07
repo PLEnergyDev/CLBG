@@ -5,6 +5,7 @@ using SocketComm;
 
 namespace BenchmarkRunner.Benchmarks.C_;
 
+/// TODO: WARNING uses non-public versions of IPC CSharpRAPL
 public class IPCTest
 {
     //[Benchmark("IPC test", "Test IPC",

@@ -18,6 +18,6 @@
 #define UNLIKELY(x) __builtin_expect(!!(x), 0)
 #define RAMP16 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 
-int FannkuchRedux(ulong loopIterations);
+long FannkuchRedux(ulong loopIterations);
 
 #endif //C_FANNKUCHREDUX_H

@@ -14,6 +14,6 @@
 #define DAYS_PER_YEAR 365.24
 #define PAIRS (N*(N-1)/2)
 
-int NBody(ulong loopIterations);
+double NBody(ulong loopIterations);
 
 #endif //C_NBODY_H

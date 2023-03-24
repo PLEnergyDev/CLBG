@@ -10,6 +10,6 @@
 #include <stdio.h>
 #include <apr_pools.h>
 
-int BinaryTrees(ulong loopIterations);
+long BinaryTrees(ulong loopIterations);
 
 #endif //C_BINARYTREES_H

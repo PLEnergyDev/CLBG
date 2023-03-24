@@ -1,10 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 #include <scomm.h>
 #include <cmd.h>
-#include "BinaryTrees.h"
+#include <stdbool.h>
+#include <simpleConversion.h>
 ///Includes here
+
 
 int main(int argc, char **argv){
     if(argc<=1){
@@ -18,23 +19,31 @@ int main(int argc, char **argv){
         exit(EXIT_FAILURE);
     }
     writeCmd(s, Ready);
-    // TODO: Get loopiterations over ipc
-    int LoopIterations = 1;
-    int c;
-    do{
+    bool flag = true;
+    while(flag){
         writeCmd(s, Ready);
-        if(expectCmd(s, Go)){
-            ///Compute benchmark here!
-            BinaryTrees(LoopIterations);
-        }else
-        {
-            exit(EXIT_FAILURE);
-        }
-        // TODO: return value
-        writeCmd(s, Done); //
-        c = readCmd(s);
-    } while(c == Ready);
-    // we should have read done at this point
+
+        expectCmd(s, Receive);
+
+        ulong loopIterations = *((ulong*)receiveValue(s,byteToNumberGeneric, sizeof(ulong)));
+
+        writeCmd(s, Ready);
+        expectCmd(s, Go);
+
+        ///Compute benchmark here
+
+
+
+        writeCmd(s, Done);
+        expectCmd(s, Ready);
+
+        ///Send return value here
+
+
+        CMD c = readCmd(s);
+        flag = c == Ready;
+    }
+
     printf("\ndone\n");
     closeSocket(s);
 }

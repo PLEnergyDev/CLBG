@@ -1,9 +1,5 @@
 #include "FannkuchRedux.h"
 
-
-
-
-
 static __m128i masks_shift[16] ALIGN(16);
 static uint64_t factorials[MAX_N + 1];
 
@@ -92,7 +88,7 @@ static void* fannkuch_func(void* param) {
 
 #define MAX_THREADS 64
 
-int FannkuchRedux(ulong loopIterations) {
+long FannkuchRedux(ulong loopIterations) {
     int i, n, nthreads = 4; uint64_t tmp = 1;
     __m128i ramp = _mm_setr_epi8(RAMP16);
     __m128i c1 = _mm_set1_epi8(1), v0, v1, v2;
@@ -114,6 +110,8 @@ int FannkuchRedux(ulong loopIterations) {
     if (nthreads < 1) nthreads = 1;
     if (nthreads > MAX_THREADS) nthreads = MAX_THREADS;
 
+    long result = 0;
+
     for (ulong l = 0; l < loopIterations; l++ ) {
         struct fannkuch_data data = { 0 };
         uint64_t block_end;
@@ -130,7 +128,9 @@ int FannkuchRedux(ulong loopIterations) {
             pthread_create(buf + i, NULL, fannkuch_func, &data);
         fannkuch_func(&data);
         for (i = 1; i < nthreads; i++) pthread_join(buf[i], NULL);
-        printf("%lld\nPfannkuchen(%u) = %u\n", data.checksum, n, data.max_flips);
+        //printf("%lld\nPfannkuchen(%u) = %u\n", data.checksum, n, data.max_flips);
+        result += data.checksum;
     }
+    return result;
 }
 

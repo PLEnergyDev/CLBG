@@ -122,7 +122,7 @@ static void advance(double dt, double *m, __m256d *p, __m256d *v) {
     }
 }
 
-int NBody(ulong loopIterations) {
+double NBody(ulong loopIterations) {
 
     double m[N];
     __m256d p[N], v[N];
@@ -184,10 +184,10 @@ int NBody(ulong loopIterations) {
     }
     v[0] = _mm256_mul_pd(o, _mm256_set1_pd(-1.0 / SOLAR_MASS));
 
-    printf("%.9f\n", energy(m, p, v));
+    //printf("%.9f\n", energy(m, p, v));
     for(ulong i=0; i < loopIterations; i++)
         advance(0.01, m, p, v);
-    printf("%.9f\n", energy(m, p, v));
+    //printf("%.9f\n", energy(m, p, v));
 
-    return 0;
+    return energy(m,p,v);
 }

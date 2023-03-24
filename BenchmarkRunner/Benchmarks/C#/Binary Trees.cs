@@ -6,7 +6,7 @@ namespace BenchmarkRunner.Benchmarks.C_;
 
 using System;
 using System.Threading.Tasks;
-
+[SkipBenchmarks]
 public class BinaryTrees
 {
     const int MinDepth = 4;

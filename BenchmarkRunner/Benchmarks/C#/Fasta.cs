@@ -1,13 +1,15 @@
 using CsharpRAPL.Benchmarking.Attributes;
 using CsharpRAPL.Benchmarking.Attributes.Parameters;
-
-namespace BenchmarkRunner.Benchmarks.C_;
 using System;
 using System.Text;
 using System.Buffers;
 using System.Threading;
 using System.Runtime.CompilerServices;
 
+
+namespace BenchmarkRunner.Benchmarks.C_;
+
+[SkipBenchmarks]
 public class Fasta
 {
     const int Width = 60;

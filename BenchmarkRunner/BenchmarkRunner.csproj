@@ -8,12 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CsharpRAPL" Version="1.4.1.4" />
+      <PackageReference Include="CsharpRAPL" Version="1.4.1.7" />
       <PackageReference Include="SocketComm" Version="1.1.2.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Benchmarks\C" />
     </ItemGroup>
 
 </Project>

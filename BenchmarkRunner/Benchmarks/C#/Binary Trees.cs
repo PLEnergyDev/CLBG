@@ -15,7 +15,7 @@ public class BinaryTrees
     [Benchmark("Binary Trees","Binary trees in C#", name:"C sharp BT", skip: false)]
     public static int BinaryTree([BenchmarkLoopiterations] ulong LoopIterations)
     {
-        int maxDepth = 7;
+        int maxDepth = 21;
         int result = 0;
 
         //Console.WriteLine(string.Concat("stretch tree of depth ", maxDepth + 1,"\t check: ", (bottomUpTree(maxDepth + 1)).itemCheck()));

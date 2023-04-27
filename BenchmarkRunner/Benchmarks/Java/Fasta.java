@@ -146,7 +146,7 @@ public class Fasta {
 
         long result = 0;
 
-        for( long i = 0; i < loopIterations; i++){
+        for( long i = 0; Long.compareUnsigned(i, loopIterations) < 0; i++){
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             makeRepeatFasta("ONE", "Homo sapiens alu", ALU, n * 2, out);
             makeRandomFasta("TWO", "IUB ambiguity codes", IUB, n * 3, out);

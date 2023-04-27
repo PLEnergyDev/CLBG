@@ -2,7 +2,7 @@ public class NBody {
 
     public static double nbody(long loopIterations){
         var bodies = new NBodySystem();
-        for (long i = 0; i < loopIterations; i++){
+        for (long i = 0; Long.compareUnsigned(i, loopIterations) < 0; i++){
             bodies.advance(0.01);
         }
         return bodies.energy();

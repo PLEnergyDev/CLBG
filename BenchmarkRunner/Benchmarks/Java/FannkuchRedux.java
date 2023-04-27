@@ -56,7 +56,7 @@ public class FannkuchRedux {
     public static int fannkuchRedux(long loopIterations){
         int result = 0;
         int n = 12;
-        for(long i = 0; i <  loopIterations; i++){
+        for(long i = 0; Long.compareUnsigned(i, loopIterations) < 0; i++){
             result += fannkuch(n);
         }
 

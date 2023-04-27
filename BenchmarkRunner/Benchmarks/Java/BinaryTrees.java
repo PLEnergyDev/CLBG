@@ -1,6 +1,3 @@
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 public class BinaryTrees {
 
     public static long binaryTrees(long loopIterations) throws Exception {
@@ -14,7 +11,7 @@ public class BinaryTrees {
 
         TreeNode longLivedTree = TreeNode.create(maxDepth);
         long result = 0;
-        for(long l = 0; l < loopIterations; l++){
+        for(long l = 0; Long.compareUnsigned(l, loopIterations) < 0; l++){
             for (int depth = minDepth; depth <= maxDepth; depth += 2)
             {
                 int iterations = 1 << (maxDepth - depth + minDepth);

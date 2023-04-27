@@ -4,8 +4,6 @@ using CsharpRAPL.Benchmarking.Lifecycles;
 
 namespace BenchmarkRunner.Benchmarks.C_;
 
-using System;
-using System.Threading.Tasks;
 [SkipBenchmarks]
 public class BinaryTrees
 {
@@ -27,20 +25,17 @@ public class BinaryTrees
             //var results = new string[(maxDepth - MinDepth) / 2 + 1];
             int depth = maxDepth;
             int n = (1 << depth + MinDepth) / NoTasks;
-            var tasks = new Task<int>[NoTasks];
+            var tasks = new int[NoTasks];
             for (int t = 0; t < tasks.Length; t++)
             {
-                tasks[t] = Task.Run(() =>
-                {
-                    var check = 0;
-                    for (int i = n; i > 0; i--)
-                        check += (bottomUpTree(depth)).itemCheck();
-                    return check;
-                });
+                var checkt = 0;
+                for (int it = n; it > 0; it--)
+                    checkt += (bottomUpTree(depth)).itemCheck();
+                tasks[t] = checkt;
             } 
-            var check = tasks[0].Result;
+            var check = tasks[0];
             for (int t = 1; t < tasks.Length; t++)
-                check += tasks[t].Result;
+                check += tasks[t];
             result += check;
         }
         

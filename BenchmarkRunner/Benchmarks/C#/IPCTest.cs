@@ -6,6 +6,7 @@ using SocketComm;
 namespace BenchmarkRunner.Benchmarks.C_;
 
 /// TODO: WARNING uses non-public versions of IPC CSharpRAPL
+[SkipBenchmarks]
 public class IPCTest
 {
     //[Benchmark("IPC test", "Test IPC",
@@ -78,12 +79,12 @@ public class IPCTest
     }
 
     [Benchmark("Fannkuch redux", "Fannkuch redux in C# over IPC", typeof(IpcBenchmarkLifecycle),
-        name: "C sharp FR IPC")]
+        name: "C sharp FR IPC", skip: false)]
     public static IpcState IPCFR(IpcState s)
     {
         return IPCBinaryTrees(s);
     }
-    [Benchmark("Fasta", "Fasta in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FAS IPC") ]
+    [Benchmark("Fasta", "Fasta in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FAS IPC", skip: false) ]
     public static IpcState IPCFasta(IpcState s)
     {
         s.ExecutablePath = "../CSIPC/bin/Release/net6.0/CSIPC";
@@ -104,13 +105,13 @@ public class IPCTest
         return s;
     }
 
-    [Benchmark("Fasta", "Fasta optimized in C# over IPC", typeof(IpcBenchmarkLifecycle),name:"C sharp FAS opt IPC")]
+    [Benchmark("Fasta", "Fasta optimized in C# over IPC", typeof(IpcBenchmarkLifecycle),name:"C sharp FAS opt IPC", skip: false)]
     public static IpcState IPCFastaOptimized(IpcState s)
     {
         return IPCFasta(s);
     }
 
-    [Benchmark("Fannkuch redux", "Fannkuch redux optimized in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FR opt IPC")]
+    [Benchmark("Fannkuch redux", "Fannkuch redux optimized in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FR opt IPC", skip: false)]
     public static IpcState IPCFROptimized(IpcState s)
     {
         return IPCFR(s);

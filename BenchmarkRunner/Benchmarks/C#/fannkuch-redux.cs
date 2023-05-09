@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
+[SkipBenchmarks]
 public class fannkuch_redux
 {
     private const int MAX_N = 16;
@@ -34,20 +35,19 @@ public class fannkuch_redux
 
         // End Setup
         // Thread Setup
-        var nThreads = 4;
+        var nThreads = 1;
         var maxBlocks = 96 / 4;
         _blockCount = maxBlocks * nThreads;
         _blockSize = factorials[_n] / _blockCount;
         var result = 0;
         for (ulong u = 0; u < LoopIterations; u++)
         {
-            var threads = new Thread[nThreads];
-            for (var i = 1; i < nThreads; i++)
-                (threads[i] = new Thread(() => pfannkuchThread()) { IsBackground = true, Priority = ThreadPriority.Highest }).Start();
-            //Console.Out.Write("");
+            //var threads = new Thread[nThreads];
+            //for (var i = 1; i < nThreads; i++)
+             //   (threads[i] = new Thread(() => pfannkuchThread()) { IsBackground = true, Priority = ThreadPriority.Highest }).Start();
             pfannkuchThread();
-            for (var i = 1; i < threads.Length; i++)
-                threads[i].Join();
+            //for (var i = 1; i < threads.Length; i++)
+              //  threads[i].Join();
             result += _checksum;
         }
         

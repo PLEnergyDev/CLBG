@@ -1,6 +1,4 @@
 ﻿
-using System.Linq.Expressions;
-using System.Text;
 using SocketComm;
 using BenchmarkRunner.Benchmarks.C_;
 if (args.Length < 1)

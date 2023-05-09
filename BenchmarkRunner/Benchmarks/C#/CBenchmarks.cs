@@ -3,7 +3,7 @@ using CsharpRAPL.Benchmarking.Lifecycles;
 using SocketComm;
 
 namespace BenchmarkRunner.Benchmarks.C_;
-
+[SkipBenchmarks]
 public class CBenchmarks
 {
     [Benchmark("NBody", "NBody in C over IPC",

@@ -29,13 +29,10 @@ public class Main {
 
                 ///Compute benchmark here
 
-
                 pipe.WriteCmd(Cmd.Done);
                 pipe.ExpectCmd(Cmd.Ready);
 
                 ///Send return value here
-
-
 
                 var c = pipe.ReadCmd();
 

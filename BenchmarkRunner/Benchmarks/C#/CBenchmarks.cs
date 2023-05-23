@@ -6,9 +6,7 @@ namespace BenchmarkRunner.Benchmarks.C_;
 
 public class CBenchmarks
 {
-    [Benchmark("NBody", "NBody in C over IPC",
-        typeof(IpcBenchmarkLifecycle),
-        name: "C Nbody ", skip: false)]
+    //[Benchmark("NBody", "NBody in C over IPC",typeof(IpcBenchmarkLifecycle),name: "C Nbody ", skip: false)]
     public static CState CNBody(IpcState old)
     {
         var s = new CState(old)
@@ -38,9 +36,31 @@ public class CBenchmarks
         return s;
     }
     
-    [Benchmark("Fasta", "Fasta in C over IPC",
-        typeof(IpcBenchmarkLifecycle),
-        name: "C Fasta ", skip: false)]
+    [Benchmark("NBody", "NBody in C over IPC",typeof(IpcBenchmarkLifecycle),name: "C Nbody O1", skip: false)]
+    public static CState CNBodyO1(IpcState s)
+    {
+        var state = CNBody(s);
+        state.AdditionalCompilerOptions += "-O1";
+        return state;
+    }
+    
+    [Benchmark("NBody", "NBody in C over IPC",typeof(IpcBenchmarkLifecycle),name: "C Nbody O2", skip: false)]
+    public static CState CNBodyO2(IpcState s)
+    {
+        var state = CNBody(s);
+        state.AdditionalCompilerOptions += "-O2";
+        return state;
+    }
+    
+    [Benchmark("NBody", "NBody in C over IPC",typeof(IpcBenchmarkLifecycle),name: "C Nbody O3", skip: false)]
+    public static CState CNBodyO3(IpcState s)
+    {
+        var state = CNBody(s);
+        state.AdditionalCompilerOptions += "-O3";
+        return state;
+    }
+    
+    //[Benchmark("Fasta", "Fasta in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C Fasta ", skip: false)]
     public static CState CFasta(IpcState old)
     {
         var s = new CState(old)
@@ -67,10 +87,32 @@ public class CBenchmarks
 
         return s;
     }
+
+    [Benchmark("Fasta", "Fasta in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C Fasta O1", skip: false)]
+    public static CState CFastaO1(IpcState s)
+    {
+        var state = CFasta(s);
+        state.AdditionalCompilerOptions = "-O1";
+        return state;
+    }
     
-    [Benchmark("Binary Trees", "Binary trees in C over IPC",
-        typeof(IpcBenchmarkLifecycle),
-        name: "C BT ", skip: false)]
+    [Benchmark("Fasta", "Fasta in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C Fasta O2", skip: false)]
+    public static CState CFastaO2(IpcState s)
+    {
+        var state = CFasta(s);
+        state.AdditionalCompilerOptions = "-O2";
+        return state;
+    }
+    
+    [Benchmark("Fasta", "Fasta in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C Fasta O3", skip: false)]
+    public static CState CFastaO3(IpcState s)
+    {
+        var state = CFasta(s);
+        state.AdditionalCompilerOptions = "-O3";
+        return state;
+    }
+    
+    //[Benchmark("Binary Trees", "Binary trees in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C BT ", skip: false)]
     public static CState CBT(IpcState old)
     {
         var s = new CState(old)
@@ -99,9 +141,33 @@ public class CBenchmarks
 
         return s;
     }
-    [Benchmark("Fannkuch Redux", "Fannkuch redux in C over IPC",
-        typeof(IpcBenchmarkLifecycle),
-        name: "C FR ", skip: false)]
+
+    [Benchmark("Binary Trees", "Binary trees in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C BT O1", skip: false)]
+    public static CState CBTO1(IpcState s)
+    {
+        var state = CBT(s);
+        state.AdditionalCompilerOptions = "-O1";
+        return state;
+    }
+    
+    [Benchmark("Binary Trees", "Binary trees in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C BT O2", skip: false)]
+    public static CState CBTO2(IpcState s)
+    {
+        var state = CBT(s);
+        state.AdditionalCompilerOptions = "-O2";
+        return state;
+    }
+
+    [Benchmark("Binary Trees", "Binary trees in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C BT O3", skip: false)]
+    public static CState CBTO3(IpcState s)
+    {
+        var state = CBT(s);
+        state.AdditionalCompilerOptions = "-O3";
+        return state;
+    }
+
+    
+    //[Benchmark("Fannkuch Redux", "Fannkuch redux in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C FR ", skip: false)]
     public static CState CFR(IpcState old)
     {
         var s = new CState(old)
@@ -126,5 +192,29 @@ public class CBenchmarks
         };
 
         return s;
+    }
+
+    [Benchmark("Fannkuch Redux", "Fannkuch redux in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C FR O1", skip: false)]
+    public static CState CFRO1(IpcState s)
+    {
+        var state = CFR(s);
+        state.AdditionalCompilerOptions += "-O1";
+        return state;
+    }
+    
+    [Benchmark("Fannkuch Redux", "Fannkuch redux in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C FR O2", skip: false)]
+    public static CState CFRO2(IpcState s)
+    {
+        var state = CFR(s);
+        state.AdditionalCompilerOptions += "-O2";
+        return state;
+    }
+    
+    [Benchmark("Fannkuch Redux", "Fannkuch redux in C over IPC", typeof(IpcBenchmarkLifecycle), name: "C FR O3", skip: false)]
+    public static CState CFRO3(IpcState s)
+    {
+        var state = CFR(s);
+        state.AdditionalCompilerOptions += "-O3";
+        return state;
     }
 }

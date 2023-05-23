@@ -3,7 +3,6 @@ using CsharpRAPL.Benchmarking.Attributes.Parameters;
 
 namespace BenchmarkRunner.Benchmarks.C_;
 
-[SkipBenchmarks]
 public class n_body
 {
     [Benchmark("NBody", "NBody n C#", name:"C sharp NB", skip: false)]

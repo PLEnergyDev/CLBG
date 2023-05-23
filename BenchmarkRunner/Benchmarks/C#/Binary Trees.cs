@@ -4,16 +4,15 @@ using CsharpRAPL.Benchmarking.Lifecycles;
 
 namespace BenchmarkRunner.Benchmarks.C_;
 
-[SkipBenchmarks]
 public class BinaryTrees
 {
     const int MinDepth = 4;
-    const int NoTasks = 4;
+    const int NoTasks = 1;
     
     [Benchmark("Binary Trees","Binary trees in C#", name:"C sharp BT", skip: false)]
     public static int BinaryTree([BenchmarkLoopiterations] ulong LoopIterations)
     {
-        int maxDepth = 21;
+        int maxDepth = 8;
         int result = 0;
 
         //Console.WriteLine(string.Concat("stretch tree of depth ", maxDepth + 1,"\t check: ", (bottomUpTree(maxDepth + 1)).itemCheck()));

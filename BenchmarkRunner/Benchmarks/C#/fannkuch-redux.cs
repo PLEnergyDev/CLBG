@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-[SkipBenchmarks]
+
 public class fannkuch_redux
 {
     private const int MAX_N = 16;

@@ -21,7 +21,7 @@ try
 
         pipe.ExpectCmd(Cmd.Receive);
         ulong loopiterations = pipe.ReceiveValue(SimpleConversion.BytesToNumber<ulong>);
-
+        //Console.WriteLine(loopiterations);
         pipe.WriteCmd(Cmd.Ready);
         pipe.ExpectCmd(Cmd.Go);
 //RUn code
@@ -34,6 +34,7 @@ try
                 pipe.SendValue(nbresult, SimpleConversion.NumberToBytes);
                 break;
             case "/tmp/IPCBinaryTrees.pipe":
+                //Console.WriteLine("running");
                 var btresult = BinaryTrees.BinaryTree(loopiterations);
                 pipe.WriteCmd(Cmd.Done);
                 pipe.ExpectCmd(Cmd.Ready);

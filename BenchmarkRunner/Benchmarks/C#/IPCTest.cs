@@ -6,7 +6,7 @@ using SocketComm;
 namespace BenchmarkRunner.Benchmarks.C_;
 
 /// TODO: WARNING uses non-public versions of IPC CSharpRAPL
-[SkipBenchmarks]
+
 public class IPCTest
 {
     //[Benchmark("IPC test", "Test IPC",
@@ -84,6 +84,7 @@ public class IPCTest
     {
         return IPCBinaryTrees(s);
     }
+    
     [Benchmark("Fasta", "Fasta in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FAS IPC", skip: false) ]
     public static IpcState IPCFasta(IpcState s)
     {

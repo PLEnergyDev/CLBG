@@ -113,7 +113,7 @@ const char header2[] = ">TWO IUB ambiguity codes\n";
 const char header3[] = ">THREE Homo sapiens frequency\n";
 
 int Fasta(ulong loopIterations) {
-    int n=1000;
+    int n=800;
     //if (argc>1) n = atoi(argv[1]);
     int result = 0;
     int* res_ptr = &result;

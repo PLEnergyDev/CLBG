@@ -142,7 +142,7 @@ public class Fasta {
 
     public static long fasta(long loopIterations) throws IOException
     {
-        int n = 1000;
+        int n = 800;
 
         long result = 0;
 

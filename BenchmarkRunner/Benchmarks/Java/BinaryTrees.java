@@ -1,7 +1,7 @@
 public class BinaryTrees {
 
     public static long binaryTrees(long loopIterations) throws Exception {
-        int n = 21;
+        int n = 8;
         int minDepth = 4;
         int maxDepth = Math.max(minDepth + 2, n);
         int stretchDepth = maxDepth + 1;

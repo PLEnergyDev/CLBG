@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 
 namespace BenchmarkRunner.Benchmarks.C_;
 
-[SkipBenchmarks]
 public class Fasta_optimized
 {
      const int Width = 60;
@@ -81,18 +80,24 @@ public class Fasta_optimized
 
         for (int i = offset; i < offset + (n - 1) / BlockSize; i++)
         {
-            ThreadPool.QueueUserWorkItem(createDel,
-                Rnds(BlockSize1, i, ref seed));
+            createDel(Rnds(BlockSize1, i, ref seed));
+            //ThreadPool.QueueUserWorkItem(createDel,
+            //    Rnds(BlockSize1, i, ref seed));
         }
 
         var remaining = (n - 1) % BlockSize + 1;
         var l = remaining + (remaining - 1) / Width + 1;
-        ThreadPool.QueueUserWorkItem(o =>
+
+        var rnds = Rnds(l, offset + (n - 1) / BlockSize, ref seed);
+        blocks[rnds[0]] = Tuple.Create(Bytes(l, rnds, ps, vs), l);
+        intPool.Return(rnds);
+        
+        /*ThreadPool.QueueUserWorkItem(o =>
         {
             var rnds = (int[])o;
             blocks[rnds[0]] = Tuple.Create(Bytes(l, rnds, ps, vs), l);
             intPool.Return(rnds);
-        }, Rnds(l, offset + (n - 1) / BlockSize, ref seed));
+        }, Rnds(l, offset + (n - 1) / BlockSize, ref seed));*/
 
         return seed;
     }
@@ -100,15 +105,30 @@ public class Fasta_optimized
     [Benchmark("Fasta","Fasta in C# with optimizations", name:"C sharp FAS opt", skip: false)]
     public static long Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
-        int n = 1000;
+        int n = 800;
         long result = 0;
         for (ulong u = 0; u < LoopIterations; u++)
         {
             var o = new MemoryStream();
             var blocks = new Tuple<byte[], int>[
             (3 * n - 1) / BlockSize + (5 * n - 1) / BlockSize + 3];
+            
+            var seed = WriteRandom(3 * n, 0, SEED,
+                new[] { (byte)'a', (byte)'c', (byte)'g', (byte)'t',
+                    (byte)'B', (byte)'D', (byte)'H', (byte)'K', (byte)'M',
+                    (byte)'N', (byte)'R', (byte)'S', (byte)'V', (byte)'W',
+                    (byte)'Y', (byte)'\n' },
+                new[] { 0.27F,0.12F,0.12F,0.27F,0.02F,0.02F,0.02F,0.02F,0.02F,
+                    0.02F,0.02F,0.02F,0.02F,0.02F,0.02F,1.00F }, blocks);
 
-            ThreadPool.QueueUserWorkItem(_ =>
+            WriteRandom(5 * n, (3 * n - 1) / BlockSize + 2, seed,
+                new byte[] { (byte)'a', (byte)'c', (byte)'g', (byte)'t',
+                    (byte)'\n' },
+                new[] { 0.3029549426680F, 0.1979883004921F,
+                    0.1975473066391F, 0.3015094502008F,
+                    1.0F }, blocks);
+            
+            /*ThreadPool.QueueUserWorkItem(_ =>
             {
                 var seed = WriteRandom(3 * n, 0, SEED,
                 new[] { (byte)'a', (byte)'c', (byte)'g', (byte)'t',
@@ -124,7 +144,7 @@ public class Fasta_optimized
                 new[] { 0.3029549426680F, 0.1979883004921F,
                         0.1975473066391F, 0.3015094502008F,
                         1.0F }, blocks);
-            });
+            });*/
 
             o.Write(Encoding.ASCII.GetBytes(">ONE Homo sapiens alu"), 0, 21);
             var table = Encoding.ASCII.GetBytes(

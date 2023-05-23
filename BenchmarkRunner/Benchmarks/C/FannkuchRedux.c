@@ -106,7 +106,7 @@ long FannkuchRedux(ulong loopIterations) {
 
     //if (argc > 2 && !strcmp(argv[1], "-t"))
     //    argc -= 2, argv += 2, nthreads = atoi(*argv);
-    nthreads = 12;
+    nthreads = 1;
     if (nthreads < 1) nthreads = 1;
     if (nthreads > MAX_THREADS) nthreads = MAX_THREADS;
 
@@ -124,10 +124,10 @@ long FannkuchRedux(ulong loopIterations) {
         data.block_size = block_end / (block_end > MAX_BLOCKS ? MAX_BLOCKS : 1);
         data.block_end = block_end;
 
-        for (i = 1; i < nthreads; i++)
-            pthread_create(buf + i, NULL, fannkuch_func, &data);
+        //for (i = 1; i < nthreads; i++)
+        //    pthread_create(buf + i, NULL, fannkuch_func, &data);
         fannkuch_func(&data);
-        for (i = 1; i < nthreads; i++) pthread_join(buf[i], NULL);
+        //for (i = 1; i < nthreads; i++) pthread_join(buf[i], NULL);
         //printf("%lld\nPfannkuchen(%u) = %u\n", data.checksum, n, data.max_flips);
         result += data.checksum;
     }

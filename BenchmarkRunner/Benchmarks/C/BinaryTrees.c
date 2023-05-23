@@ -47,7 +47,7 @@ long BinaryTrees(ulong loopIterations){
     // Set minimum_Tree_Depth to 4 and maximum_Tree_Depth to the maximum of what
     // was specified as the argument to the program and minimum_Tree_Depth+2.
     const intnative_t minimum_Tree_Depth=4,
-            maximum_Tree_Depth=21;
+            maximum_Tree_Depth=8;
 
     apr_initialize();
     long result = 0;

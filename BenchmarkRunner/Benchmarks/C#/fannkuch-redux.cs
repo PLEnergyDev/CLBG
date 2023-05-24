@@ -18,7 +18,7 @@ public class fannkuch_redux
     private static int _blockSize;
 
     //[MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    [Benchmark("Fannkuch redux", "Fannuck redux in C#", name: "C sharp FR", skip: false)]
+    [Benchmark("Fannkuch Redux", "Fannuck redux in C#", name: "C sharp FR", skip: false)]
     public static int Main([BenchmarkLoopiterations] ulong LoopIterations)
     {
         _n = 12;

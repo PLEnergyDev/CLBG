@@ -78,7 +78,7 @@ public class IPCTest
         return s;
     }
 
-    [Benchmark("Fannkuch redux", "Fannkuch redux in C# over IPC", typeof(IpcBenchmarkLifecycle),
+    [Benchmark("Fannkuch Redux", "Fannkuch redux in C# over IPC", typeof(IpcBenchmarkLifecycle),
         name: "C sharp FR IPC", skip: false)]
     public static IpcState IPCFR(IpcState s)
     {
@@ -112,7 +112,7 @@ public class IPCTest
         return IPCFasta(s);
     }
 
-    [Benchmark("Fannkuch redux", "Fannkuch redux optimized in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FR opt IPC", skip: false)]
+    [Benchmark("Fannkuch Redux", "Fannkuch redux optimized in C# over IPC", typeof(IpcBenchmarkLifecycle), name:"C sharp FR opt IPC", skip: false)]
     public static IpcState IPCFROptimized(IpcState s)
     {
         return IPCFR(s);
